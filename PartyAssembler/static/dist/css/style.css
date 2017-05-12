@@ -1,0 +1,30 @@
+.users-list {
+   width: 100%;
+}
+.users-list li img{
+   border: 4px solid transparent;
+}
+.users-list li .admin-img{
+   border: 4px solid #e7ca0c;
+   box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
+.users-list li .user-img{
+   border: 4px solid #07c114;
+   box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
+.direct-chat-messages{
+   height: 450px;
+}
+.jumbotron {
+   background-image: url("../img/bg-game.jpg");
+   background-repeat: no-repeat;
+   background-size: 100% 700px;
+   padding-top: 300px;
+   padding-bottom: 150px;
+   text-align: center;
+   color: #ffffff;
+
+}
+.skin-yellow .main-header .navbar-transparent {
+   background-color: transparent;
+}
