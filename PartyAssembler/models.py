@@ -27,6 +27,7 @@ class ta_joga (models.Model):
 class Times(models.Model):
  nome=models.CharField(max_length=50, default='Nome')
  descricao= models.TextField
+ foto_perfil=models.FileField
 
 class Participa(models.Model):
 # id_part=models.IntegerField(default='1')
