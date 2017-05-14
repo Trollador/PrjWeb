@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <form class="post-form" method="post">{% csrf_token %}
-  <p class="login-box-msg">Registre novo membro</p>
+  <p class="login-box-msg">Entre para iniciar uma sessão</p>
     {{ form.as_p }}
   <div class="row">
     <!-- /.col -->
     <div class="col-xs-4">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+      <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
     </div>
     <!-- /.col -->
   </div>
