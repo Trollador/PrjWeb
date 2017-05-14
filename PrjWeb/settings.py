@@ -57,7 +57,9 @@ ROOT_URLCONF = 'PrjWeb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR + '/templates'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +80,11 @@ WSGI_APPLICATION = 'PrjWeb.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'PartyAssembler',
+        'HOST': '127.0.0.1',
+        'USER': 'root',
+        'PASSWORD': 'G532b131',
     }
 }
 
