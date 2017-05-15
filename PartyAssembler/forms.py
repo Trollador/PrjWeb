@@ -1,26 +1,41 @@
 # -*- coding: utf-8 -*-
 from django.forms import ModelForm
 from django import forms
-from .models import Registro_usuario
+from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.ModelForm):
     class Meta:
-        model = Registro_usuario
-        fields = ['nome','apelido','dta_nasc','email','senha']
+        model = User
+        fields = ['first_name','username','last_name','email','password']
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control','maxlength': 255, 'placeholder': 'Nome'}),
-            'apelido': forms.TextInput(attrs={'class': 'form-control','maxlength': 255}),
-            'email': forms.TextInput(attrs={'class': 'form-control','maxlength': 255}),
-            'dta_nasc': forms.TextInput(attrs={'class': 'form-control','maxlength': 10}),
-            'senha': forms.PasswordInput(attrs={'class':'form-control','maxlength': 255}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome'}),
+            'username': forms.TextInput(attrs={'class': 'form-control','maxlength': 15, 'placeholder': 'Nome de usuário' }),
+            'email': forms.TextInput(attrs={'class': 'form-control','maxlength': 30, 'placeholder': 'E-mail'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 10, 'placeholder': 'Data de nascimento'}),
+            'password': forms.PasswordInput(attrs={'class':'form-control','maxlength': 12, 'placeholder': 'Nome'}),
+        }
+        error_messages = {
+            'first_name': {
+                'required': 'Campo obrigatório'
+            },
+            'username': {
+                'required': 'Campo obrigatório'
+            },
+            'email': {
+                'required': 'Campo obrigatório'
+            },
+            'last_name': {
+                'required': 'Campo obrigatório'
+            },
+            'password': {
+                'required': 'Campo obrigatório'
+            },
         }
 
-class LoginForm(forms.ModelForm):
-    class Meta:
-        model = Registro_usuario
-        fields = ['apelido','senha']
-        widgets = {
-            'apelido': forms.TextInput(attrs={'class': 'form-control','maxlength': 255}),
-            'senha': forms.PasswordInput(attrs={'class':'form-control','maxlength': 255}),
-        }
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user

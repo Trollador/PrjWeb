@@ -84,8 +84,8 @@
       <div>
         <h1><spam>Party<b>Assembler</b></spam><h1>
           <p class="lead">Monte seu time para seus jogos preferidos, conheça novas pessoas.</p>
-          <button type="button" class="btn bg-orange margin btn-lg">Entrar</button>
-          <button type="button" class="btn bg-red margin btn-lg">Registrar</button>
+          <button onclick="location.href='{% url 'PartyAssembler:login' %}'" type="button" class="btn bg-orange margin btn-lg">Entrar</button>
+          <button onclick="location.href='{% url 'PartyAssembler:register' %}'" type="button" class="btn bg-red margin btn-lg">Registrar</button>
       </div>
     </div>
   </div>
@@ -100,8 +100,6 @@
     </div>
     <strong>Copyright &copy; 2017 <a href="">Party Assembler</a>.</strong> Todos os direitos reservados.
   </footer>
-  <!-- Change the modal with tab 2 selected-->
-  <script src="static/dist/js/modal-tabs.js"></script>
   <!-- jQuery 2.2.3 -->
   <script src="static/plugins/jQuery/jquery-2.2.3.min.js"></script>
   <!-- Alterar Navbar Color -->
