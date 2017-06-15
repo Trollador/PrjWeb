@@ -45,3 +45,8 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = User_profile
         fields = ('nickname', 'tags', 'description', 'profile_img')
+        widgets =  {
+            'nickname': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
+            'tags': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nicknames usados em jogos'}),
+            'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Sua descrição como jogador'}),
+            }
