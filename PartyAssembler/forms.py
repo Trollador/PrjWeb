@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-
+from .models import User_profile
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -39,3 +39,9 @@ class RegisterForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = User_profile
+        fields = ('nickname', 'tags', 'description', 'profile_img')

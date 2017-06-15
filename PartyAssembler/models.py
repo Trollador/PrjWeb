@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 def upload_location(instance, filename):
     return "%s%s" %(instance.id, filename)

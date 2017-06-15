@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect # Funcao para redirecionar o usuario
-from .forms import RegisterForm
+from .forms import RegisterForm, ProfileForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Game
@@ -33,3 +33,13 @@ def do_login(request):
 def do_logout(request):
     logout(request)
     return redirect('/login')
+
+def user_profile(request):
+    if request.method == "POST":
+       form = ProfileForm(request.POST)
+       if form.is_valid():
+        form.save()
+        return redirect('/games')
+    else:
+      form = ProfileForm()
+    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})

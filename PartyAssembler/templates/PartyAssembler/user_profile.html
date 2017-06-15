@@ -1,0 +1,34 @@
+{% extends 'baseNav.html' %}
+{% block content %}
+
+<form method="POST" class="post-form">{% csrf_token %}
+<!--{{ form.as_p }} -->
+<div class="box box-warning">
+            <div class="box-header with-border">
+              <h3 class="box-title">Perfil de Usuário</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+                <div class="form-group">
+                  {{ form.nickname }}
+                </div>
+                <div class="form-group">
+                  {{ form.tags }}
+                </div>
+                <div class="form-group">
+                  {{ form.description }}
+                </div>
+                <div class="form-group">
+                  {{ form.profile_img }}
+                </div>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Atualizar</button>
+              </div>
+            </form>
+          </div>
+
+{% endblock %}
