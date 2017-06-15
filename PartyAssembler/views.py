@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponseRedirect # Funcao para redirecionar o usuario
-from .forms import RegisterForm, ProfileForm
+from .forms import RegisterForm, ProfileForm, PartyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Game
+from .models import Game, Party
 
 def home(request):
     return render_to_response('PartyAssembler/index.html')
@@ -43,3 +43,13 @@ def user_profile(request):
     else:
       form = ProfileForm()
     return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
+
+def create_party(request):
+    if request.method == "POST":
+       form = PartyForm(request.POST)
+       if form.is_valid():
+        form.save()
+        return redirect('/party')
+    else:
+      form = PartyForm()
+    return render(request, 'PartyAssembler/create_party.html', {'form' : form})

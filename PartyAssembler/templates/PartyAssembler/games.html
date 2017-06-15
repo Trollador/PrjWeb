@@ -10,6 +10,11 @@
     <li class="active">Games</li>
   </ol>
 </section>
+<section class="content-header">
+  <ol class="breadcrumb">
+      <li><button type="button" class="btn btn-block btn-warning btn-sm" onclick="location.href='{% url 'PartyAssembler:create_party' %}'">Criar Party</button></li>
+  </ol>
+</section>
 <section class="content">
   {% for n in img %}
       <div class="col-md-3">

@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import User_profile
+from .models import User_profile, Party
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -40,7 +40,6 @@ class RegisterForm(forms.ModelForm):
             user.save()
         return user
 
-
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User_profile
@@ -49,4 +48,13 @@ class ProfileForm(forms.ModelForm):
             'nickname': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
             'tags': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nicknames usados em jogos'}),
             'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Sua descrição como jogador'}),
+            }
+
+class PartyForm(forms.ModelForm):
+    class Meta:
+        model = Party
+        fields = ('name', 'description', 'party_img')
+        widgets =  {
+            'name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
+            'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Descrição da party'}),
             }

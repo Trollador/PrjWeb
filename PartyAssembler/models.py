@@ -18,7 +18,7 @@ class User_profile(models.Model):
     height_field = models.IntegerField(default = 0)
 
 class Party(models.Model):
-    name=models.CharField(max_length = 50, default = 'Nome', primary_key = True)
+    name=models.CharField(max_length = 50, default = "", primary_key = True)
     description = models.TextField(default = "")
     party_img = models.ImageField(upload_to = upload_location,
     null = True,
