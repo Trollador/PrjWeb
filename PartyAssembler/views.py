@@ -3,13 +3,15 @@ from django.http import HttpResponseRedirect # Funcao para redirecionar o usuari
 from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Game
 
 def home(request):
     return render_to_response('PartyAssembler/index.html')
 
 @login_required
 def games(request):
-    return render(request, 'PartyAssembler/games.html')
+    img = Game.objects.all().order_by("-id")
+    return render_to_response('PartyAssembler/games.html', {'img': img})
 
 def register(request):
         form = RegisterForm(request.POST or None)

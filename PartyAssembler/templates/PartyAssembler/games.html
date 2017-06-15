@@ -11,37 +11,12 @@
   </ol>
 </section>
 <section class="content">
-  <div class="col-md-3">
-    <!-- Default box -->
-    <div class="box">
-      <div class="box-header with-border">
-        <h3 class="box-title">Overwatch</h3>
-
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-            <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-            </div>
-          </div>
-          <div class="box-body no-padding">
-            <a href="parties.html">
-              <img class="col-md-12 no-padding" border="0" alt="Overwatch" src="static/dist/img/Overwatch-272x380.jpg">
-            </a>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer">
-            Times disponíveis: 12
-          </div>
-          <!-- /.box-footer-->
-        </div>
-        <!-- /.box -->
-      </div>
+  {% for n in img %}
       <div class="col-md-3">
         <!-- Default box -->
         <div class="box">
           <div class="box-header with-border">
-            <h3 class="box-title">Rainbow Six</h3>
+            <h3 class="box-title">{{ n.name }}</h3>
 
             <div class="box-tools pull-right">
               <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -52,17 +27,15 @@
               </div>
               <div class="box-body no-padding">
                 <a href="parties.html">
-                  <img class="col-md-12 no-padding"border="0" alt="Rainbow Six" src="static/dist/img/Tom Clancy's Rainbow Six- Siege-272x380.jpg">
+                  <img class="col-md-12 no-padding"border="0" alt="{{ n.name }}" src="{{ n.game_cover.url}}">
                 </a>
               </div>
               <!-- /.box-body -->
-              <div class="box-footer">
-                Times disponíveis: 12
-              </div>
               <!-- /.box-footer-->
             </div>
             <!-- /.box -->
           </div>
+    {% endfor %}
         </section>
       </div>
 {% endblock %}

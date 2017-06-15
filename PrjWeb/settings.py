@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'PartyAssembler',
         'HOST': '127.0.0.1',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'G532b131',
     }
 }
 
@@ -128,3 +128,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = '/login'
+
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'media')
+MEDIA_URL = 'PrjWeb/media/'

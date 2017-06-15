@@ -1,16 +1,16 @@
 from django.contrib import admin
-from .models import Registro_usuario
-from .models import Jogos
-from .models import ta_joga
-from .models import Participa
-from .models import Times
-
-
-admin.site.register(Registro_usuario)
-admin.site.register(Jogos)
-admin.site.register(ta_joga)
-admin.site.register(Participa)
-admin.site.register(Times)
-
+from .models import User_profile
+from .models import Party
+from .models import Participate
+from .models import Create
+from .models import Game
+from .models import Ta_Game_User
 
 # Register your models here.
+
+admin.site.register(User_profile)
+admin.site.register(Party)
+admin.site.register(Participate)
+admin.site.register(Create)
+admin.site.register(Game)
+admin.site.register(Ta_Game_User)

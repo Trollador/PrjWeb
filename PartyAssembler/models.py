@@ -1,32 +1,52 @@
 from django.db import models
 
+def upload_location(instance, filename):
+    return "%s%s" %(instance.id, filename)
+
 # Create your models here.
-class Registro_usuario(models.Model):
- email=models.CharField(max_length=200, default="E-mail")
- nome=models.CharField(max_length=50, default="Name")
- senha=models.CharField(max_length=10, default="Password")
- dta_nasc=models.CharField(max_length=10, default="Date")
- nicks=models.TextField(default="Nicknames")
- extras=models.TextField(default="Extras")
- apelido=models.CharField(max_length=20, default="Nickname")
+class User_profile(models.Model):
+    nickname = models.CharField(max_length = 20, default = "Nickname", primary_key = True)
+    tags = models.TextField(default = "Tags")
+    description = models.TextField(default = "Description")
+    profile_img = models.ImageField(upload_to = upload_location,
+    null = True,
+    blank = True,
+    width_field = "width_field",
+    height_field = "height_field")
+    width_field = models.IntegerField(default = 0)
+    height_field = models.IntegerField(default = 0)
 
-class Jogos(models.Model):
- nome=models.CharField(max_length=50, default='Nome')
- img=models.ImageField
+class Party(models.Model):
+    name=models.CharField(max_length = 50, default = 'Nome', primary_key = True)
+    description = models.TextField(default = "")
+    party_img = models.ImageField(upload_to = upload_location,
+    null = True,
+    blank = True,
+    width_field = "width_field",
+    height_field = "height_field")
+    width_field = models.IntegerField(default = 0)
+    height_field = models.IntegerField(default = 0)
 
-class ta_joga (models.Model):
- nome_jogo=models.ForeignKey(Jogos)
- apelido_pf_usr=models.ForeignKey(Registro_usuario)
- rank=models.IntegerField()
- nivel=models.IntegerField()
- #id_joga=models.IntegerField()
+class Participate(models.Model):
+    usr_nickname = models.ForeignKey(User_profile)
+    party_name = models.OneToOneField(Party)
 
-class Times(models.Model):
- nome=models.CharField(max_length=50, default='Nome')
- descricao= models.TextField
- foto_perfil=models.FileField
+class Create(models.Model):
+    usr_nickname = models.ForeignKey(User_profile)
+    party_name = models.ForeignKey(Party)
 
-class Participa(models.Model):
-# id_part=models.IntegerField(default='1')
- apelido_usr=models.ForeignKey(Registro_usuario)
- nme_time=models.ForeignKey(Times)
+class Game(models.Model):
+    name = models.CharField(max_length = 50, default = "Name")
+    game_cover = models.ImageField(upload_to = upload_location,
+    null = True,
+    blank = True,
+    width_field = "width_field",
+    height_field = "height_field")
+    width_field = models.IntegerField(default = 0)
+    height_field = models.IntegerField(default = 0)
+
+class Ta_Game_User (models.Model):
+    game_name = models.ForeignKey(Game)
+    user_nickname = models.ForeignKey(User_profile)
+    rank = models.IntegerField()
+    level=models.IntegerField()
