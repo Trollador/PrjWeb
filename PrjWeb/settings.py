@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'PartyAssembler',
         'HOST': '127.0.0.1',
         'USER': 'root',
-        'PASSWORD': 'G532b131',
+        'PASSWORD': 'root',
     }
 }
 
