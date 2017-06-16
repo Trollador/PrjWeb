@@ -2,7 +2,9 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import User_profile, Party
+from .models import User_profile, Party, Game
+from django.forms import ModelChoiceField
+
 
 class RegisterForm(forms.ModelForm):
     class Meta:
@@ -43,14 +45,16 @@ class RegisterForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User_profile
-        fields = ('nickname', 'tags', 'description', 'profile_img')
-        widgets =  {
-            'nickname': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
-            'tags': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nicknames usados em jogos'}),
-            'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Sua descrição como jogador'}),
-            }
+        fields = ('profile_img',)
+    
+            
+class MyModelChoiceField(ModelChoiceField):
+    def label_from_instance(self,obj):
+        return obj.name
+
 
 class PartyForm(forms.ModelForm):
+    game = MyModelChoiceField(queryset=Game.objects.all(), to_field_name='name')
     class Meta:
         model = Party
         fields = ('name', 'description', 'party_img')
@@ -58,3 +62,6 @@ class PartyForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
             'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Descrição da party'}),
             }
+
+
+

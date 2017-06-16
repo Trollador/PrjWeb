@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect # Funcao para redirecionar o usuari
 from .forms import RegisterForm, ProfileForm, PartyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Game, Party
+from .models import Game, Party, Enter_party
 
 def home(request):
     return render_to_response('PartyAssembler/index.html')
@@ -13,11 +13,12 @@ def games(request):
     img = Game.objects.all().order_by("-id")
     return render_to_response('PartyAssembler/games.html', {'img': img})
 
+
 def register(request):
         form = RegisterForm(request.POST or None)
         context = {'form':form}
         if request.method == 'POST':
-            if form.is_valid():
+            if form.is_valid(): 
                 form.save()
                 return redirect('/login')
         return render(request, 'PartyAssembler/register.html', context)
@@ -34,7 +35,7 @@ def do_logout(request):
     logout(request)
     return redirect('/login')
 
-def user_profile(request):
+"""def user_profile(request):
     if request.method == "POST":
        form = ProfileForm(request.POST)
        if form.is_valid():
@@ -42,7 +43,7 @@ def user_profile(request):
         return redirect('/games')
     else:
       form = ProfileForm()
-    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
+    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})"""
 
 def create_party(request):
     if request.method == "POST":
@@ -53,3 +54,18 @@ def create_party(request):
     else:
       form = PartyForm()
     return render(request, 'PartyAssembler/create_party.html', {'form' : form})
+
+"""def baseNav(request):
+    img = User_profile.objects.all().order_by("-id")
+    name = User.objects.all().order_by("-id")
+    return render('PartyAssembler/baseNav.html', {'img':img, 'name':name})
+
+
+def parties(request):
+    user_info = User.objects.all().order_by("-id")
+    party_info = Party.objects.all().order_by("-id") 
+    leader = User.objects.name(pk = Party.leader)
+    return render_to_response('PartyAssembler/parties.html', {'user_info': user_info, 'party_info' : party_info}) 
+ 
+   """
+         
