@@ -17,6 +17,11 @@ class User_profile(models.Model):
     width_field = models.IntegerField(default = 0)
     height_field = models.IntegerField(default = 0)
 
+
+class TA_user_has_profile(models.Model):
+    username = models.ForeignKey(User) 
+    user_profile = models.ForeignKey(User_profile)
+
 class Party(models.Model):
     name=models.CharField(max_length = 50, default = "", primary_key = True)
     description = models.TextField(default = "")
@@ -51,3 +56,8 @@ class Ta_Game_User (models.Model):
     user_nickname = models.ForeignKey(User_profile)
     rank = models.IntegerField()
     level=models.IntegerField()
+
+
+class Ta_party_games(models.Model):
+    game_name = models.ForeignKey(Game)
+    party_name = models.OneToOneField(Party)
