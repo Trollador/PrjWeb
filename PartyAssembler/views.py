@@ -18,7 +18,7 @@ def register(request):
         form = RegisterForm(request.POST or None)
         context = {'form':form}
         if request.method == 'POST':
-            if form.is_valid(): 
+            if form.is_valid():
                 form.save()
                 return redirect('/login')
         return render(request, 'PartyAssembler/register.html', context)
@@ -55,6 +55,12 @@ def create_party(request):
       form = PartyForm()
     return render(request, 'PartyAssembler/create_party.html', {'form' : form})
 
+def user_session(request):
+    username = None
+    if request.user.is_authenticated():
+        username = request.user.username
+
+
 """def baseNav(request):
     img = User_profile.objects.all().order_by("-id")
     name = User.objects.all().order_by("-id")
@@ -63,9 +69,8 @@ def create_party(request):
 
 def parties(request):
     user_info = User.objects.all().order_by("-id")
-    party_info = Party.objects.all().order_by("-id") 
+    party_info = Party.objects.all().order_by("-id")
     leader = User.objects.name(pk = Party.leader)
-    return render_to_response('PartyAssembler/parties.html', {'user_info': user_info, 'party_info' : party_info}) 
- 
+    return render_to_response('PartyAssembler/parties.html', {'user_info': user_info, 'party_info' : party_info})
+
    """
-         
