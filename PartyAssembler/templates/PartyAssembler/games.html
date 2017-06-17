@@ -32,7 +32,7 @@
                 </div>
               </div>
               <div class="box-body no-padding">
-                <a href="parties.html">
+                <a href="'{% url 'PartyAssembler:parties_detail' pk=n.pk %}'">
                   <img class="col-md-12 no-padding"border="0" alt="{{ n.name }}" src="{{ n.game_cover.url}}">
                 </a>
               </div>

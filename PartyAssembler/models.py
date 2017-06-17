@@ -27,11 +27,12 @@ class Game(models.Model):
     width_field = models.IntegerField(default = 0)
     height_field = models.IntegerField(default = 0)
 
+
 class Party(models.Model):
-    name=models.CharField(max_length = 50, default = "", primary_key = True)
+    name=models.CharField(max_length = 50, default = "")
     description = models.TextField(default = "")
-    leader = models.OneToOneField(User, default = "")
-    related_game = models.ForeignKey(Game, default = "") 
+    leader = models.ForeignKey(User, default = 1)
+    related_game = models.ForeignKey(Game, default = 1) 
     party_img = models.ImageField(upload_to = upload_location,   
     null = True,
     blank = True,
@@ -41,10 +42,5 @@ class Party(models.Model):
     height_field = models.IntegerField(default = 0)
 
 class Enter_party(models.Model):
-    entry_date_time = models.DateTimeField(default=timezone.now())
-    usr_nickname = models.ForeignKey(User)
-    party_name = models.OneToOneField(Party)
-
-
-
-
+    usr_nickname = models.ForeignKey(User, default = 1)
+    party_name = models.ForeignKey(Party, default = 1)

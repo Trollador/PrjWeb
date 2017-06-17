@@ -9,3 +9,4 @@ from .models import Enter_party
 admin.site.register(User_profile)
 admin.site.register(Party)
 admin.site.register(Game)
+admin.site.register(Enter_party)

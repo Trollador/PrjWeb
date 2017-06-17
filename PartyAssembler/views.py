@@ -35,42 +35,27 @@ def do_logout(request):
     logout(request)
     return redirect('/login')
 
-"""def user_profile(request):
-    if request.method == "POST":
-       form = ProfileForm(request.POST)
-       if form.is_valid():
-        form.save()
-        return redirect('/games')
-    else:
-      form = ProfileForm()
-    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})"""
 
 def create_party(request):
     if request.method == "POST":
        form = PartyForm(request.POST)
        if form.is_valid():
+        form.leader = request.user.id
         form.save()
-        return redirect('/party')
+        return redirect('/games')
     else:
       form = PartyForm()
-    return render(request, 'PartyAssembler/create_party.html', {'form' : form})
+    return render(request, 'PartyAssembler/create_party.html', {'form' : form}) 
+
 
 def user_session(request):
     username = None
     if request.user.is_authenticated():
         username = request.user.username
 
+def parties_detail(request, pk):
+    party_info = Party.objects.filter(related_game = pk) 
+    #party = get_object_or_404(Party, pk=pk)
+    return render(request, 'PartyAssembler/parties_detail.html', {'party_info': party_info})
+  
 
-"""def baseNav(request):
-    img = User_profile.objects.all().order_by("-id")
-    name = User.objects.all().order_by("-id")
-    return render('PartyAssembler/baseNav.html', {'img':img, 'name':name})
-
-
-def parties(request):
-    user_info = User.objects.all().order_by("-id")
-    party_info = Party.objects.all().order_by("-id")
-    leader = User.objects.name(pk = Party.leader)
-    return render_to_response('PartyAssembler/parties.html', {'user_info': user_info, 'party_info' : party_info})
-
-   """
