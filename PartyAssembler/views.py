@@ -59,10 +59,14 @@ def create_party(request):
     return render(request, 'PartyAssembler/create_party.html', {'form' : form})
 
 
-def user_session(request):
-    username = None
-    if request.user.is_authenticated():
+
+def profile(request):
+    if request.user.is_active:
         username = request.user.username
+        return render (request, 'PartyAssembler/profile.html', {'username' : username})
+    else:
+        return redirect('/login')
+
 
 def parties_detail(request, pk):
     party_info = Party.objects.filter(related_game = pk)
