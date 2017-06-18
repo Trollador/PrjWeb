@@ -8,16 +8,6 @@ def upload_location(instance, filename):
 # Create your models here.
 class User_profile(models.Model):
     idt = models.OneToOneField(User, default = 1)
-    profile_img = models.ImageField(upload_to = upload_location,
-    null = True,
-    blank = True,
-    width_field = "width_field",
-    height_field = "height_field")
-    width_field = models.IntegerField(default = 0)
-    height_field = models.IntegerField(default = 0)
-
-class User_profile(models.Model):
-    idt = models.OneToOneField(User, default = 1)
     tags = models.TextField(default = "Tags")
     description = models.TextField(default = "Description")
     profile_img = models.ImageField(upload_to = upload_location,
