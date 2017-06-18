@@ -18,6 +18,7 @@ class User_profile(models.Model):
     width_field = models.IntegerField(default = 0)
     height_field = models.IntegerField(default = 0)
 
+
 class Game(models.Model):
     name = models.CharField(max_length = 50, default = "Name")
     game_cover = models.ImageField(upload_to = upload_location,

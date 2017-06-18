@@ -67,6 +67,12 @@ def profile(request):
     else:
         return redirect('/login')
 
+def profile_others(request):
+    if request.user.is_active:
+        username = request.user.username
+        return render (request, 'PartyAssembler/profile_others.html')
+    else:
+        return redirect('/login')
 
 def parties_detail(request, pk):
     party_info = Party.objects.filter(related_game = pk)

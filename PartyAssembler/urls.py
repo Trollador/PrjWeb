@@ -12,5 +12,6 @@ urlpatterns = [
      url(r'^games/parties/(?P<pk>[0-9]+)/$', views.parties_detail, name = "parties_detail"),
      url(r'^alt-profile/$', views.reg_profile, name="alt-profile"),
      url(r'^profile/$', views.profile, name= "profile"),
+     url(r'^profile_others/$', views.profile_others, name= "profile_others"),
     #url(r'^parties/$', views.parties, name="parties"),
 ]
