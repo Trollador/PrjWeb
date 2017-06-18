@@ -128,7 +128,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="{{ img.profile_img }}" class="user-image" alt="User Image">
-                <span class="hidden-xs">{{ request.user.username }}</span>
+                <span class="hidden-xs">{{ user.username }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
@@ -136,8 +136,8 @@
                   <img src="{{ img.profile_img }}" class="img-circle" alt="User Image">
 
                   <p>
-                    {{ request.user.username }}
-                    <small>{{ request.user.email }}</small>
+                    {{ user.username }}
+                    <small>{{ user.first_name }}</small>
                   </p>
                 </li>
                 <!-- Menu Body -->
