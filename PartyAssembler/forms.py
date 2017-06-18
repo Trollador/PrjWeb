@@ -59,10 +59,10 @@ class MyModelChoiceField(ModelChoiceField):
 
 
 class PartyForm(forms.ModelForm):
-    game = MyModelChoiceField(queryset=Game.objects.all(), to_field_name='name')
+    related_game = MyModelChoiceField(queryset=Game.objects.all(), to_field_name='name')
     class Meta:
         model = Party
-        fields = ('name', 'description', 'party_img')
+        fields = ('related_game','name', 'description', 'party_img')
         widgets =  {
             'name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
             'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Descrição da party'}),

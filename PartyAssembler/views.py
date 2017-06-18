@@ -39,7 +39,7 @@ def reg_profile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST)
         if form.is_valid():
-            profile = form.save(commit=False)
+            profile = form.save(commit = False)
             profile.idt = request.user
             form.save()
             return redirect('/games')
@@ -52,8 +52,6 @@ def create_party(request):
     if request.method == "POST":
        form = PartyForm(request.POST)
        if form.is_valid():
-        leader = form.save(commit=False)
-        leader = request.user.id
         form.save()
         return redirect('/games')
     else:

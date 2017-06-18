@@ -33,7 +33,7 @@ class Party(models.Model):
     name=models.CharField(max_length = 50, default = "")
     description = models.TextField(default = "")
     leader = models.ForeignKey(User, default = 1)
-    related_game = models.ForeignKey(Game, default = 1)
+    related_game = models.ForeignKey(Game, related_name='related_game', default = 1)
     party_img = models.ImageField(upload_to = upload_location,
     null = True,
     blank = True,

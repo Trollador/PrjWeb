@@ -1,45 +1,49 @@
 {% extends 'baseNav.html' %}
 {% block content %}
 
-        <section class="content-header">
-          <h1>
-            Parties
-            <small>Party por jogos</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Games</a></li>
-            <li class="active">Game</li>
-          </ol>
-        </section>
+<section class="content-header">
+  <h1>
+    Parties
+    <small>Party por jogos</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Games</a></li>
+    <li class="active">Game</li>
+  </ol>
+</section>
 
-        <section class="content col-md-3">
-          {% for n in party_info %}
-          <div class="box box-primary">
-            <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="{{party_info.party_img}}" alt="User profile picture">
-              <p class="text-muted text-center">{{party_info.name}}</p>
-              <h3 class="profile-username text-center">{{party_info.related_game}}</h3>
-              <ul class="list-group list-group-unbordered">
-                <li class="list-group-item">
-                  <b>Descrição: </b> <a>{{party_info.description}}</a>
-                </li>
-                <li class="list-group-item">
-                  <b>Membros: </b>
-                  <ul class="users-list clearfix">
-                  <li><img class="admin-img" src="{{ leader }}" alt="User Image"></li>
-                  {% for usr_nickname in Enter_party %} 
-                  <li><img class="user-img" src= " {{Enter_party.objects.usr_nickname(party_name = party_info.name)}}"  alt="User Image"></li>
-                  {% endfor %}
-                  </ul>
-                </li>
+<section class="content">
+  <div class="roll">
+    {% for n in party_info %}
+    <div class="col-md-3">
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+          <img class="profile-user-img img-responsive img-circle" src="{{party_info.party_img}}" alt="User profile picture">
+          <p class="text-muted text-center">{{party_info.name}}</p>
+          <h3 class="profile-username text-center">{{party_info.related_game}}</h3>
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+              <b>Descrição: </b> <a>{{party_info.description}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Membros: </b>
+              <ul class="users-list clearfix">
+                <li><img class="admin-img" src="{{ leader }}" alt="User Image"></li>
+                {% for usr_nickname in Enter_party %}
+                <li><img class="user-img" src= " {{Enter_party.objects.usr_nickname(party_name = party_info.name)}}"  alt="User Image"></li>
+                {% endfor %}
               </ul>
-              <a href="party.html" class="btn btn-primary btn-block"><b>Entrar na party</b></a>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          {% endfor %}
-        </section>
+            </li>
+          </ul>
+          <a href="party.html" class="btn btn-primary btn-block"><b>Entrar na party</b></a>
+        </div>
+        <!-- /.box-body -->
       </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+</div>
 
 {% endblock %}
