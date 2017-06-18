@@ -15,7 +15,7 @@ class RegisterForm(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control','maxlength': 15, 'placeholder': 'Nome de usuário' }),
             'email': forms.TextInput(attrs={'class': 'form-control','maxlength': 30, 'placeholder': 'E-mail'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 10, 'placeholder': 'Data de nascimento'}),
-            'password': forms.PasswordInput(attrs={'class':'form-control','maxlength': 12, 'placeholder': 'Nome'}),
+            'password': forms.PasswordInput(attrs={'class':'form-control','maxlength': 12, 'placeholder': 'Senha'}),
         }
         error_messages = {
             'first_name': {
@@ -45,9 +45,14 @@ class RegisterForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = User_profile
-        fields = ('profile_img',)
-    
-            
+        fields = ('tags', 'description', 'profile_img')
+        widgets =  {
+            'tags': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nicknames usados em jogos'}),
+            'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Sua descrição como jogador'}),
+            }
+
+
+
 class MyModelChoiceField(ModelChoiceField):
     def label_from_instance(self,obj):
         return obj.name
@@ -62,6 +67,3 @@ class PartyForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
             'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Descrição da party'}),
             }
-
-
-

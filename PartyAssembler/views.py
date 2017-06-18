@@ -35,17 +35,30 @@ def do_logout(request):
     logout(request)
     return redirect('/login')
 
+def reg_profile(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.idt = request.user
+            form.save()
+            return redirect('/games')
+    else:
+      form = ProfileForm()
+    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
+
 
 def create_party(request):
     if request.method == "POST":
        form = PartyForm(request.POST)
        if form.is_valid():
-        form.leader = request.user.id
+        leader = form.save(commit=False)
+        leader = request.user.id
         form.save()
         return redirect('/games')
     else:
       form = PartyForm()
-    return render(request, 'PartyAssembler/create_party.html', {'form' : form}) 
+    return render(request, 'PartyAssembler/create_party.html', {'form' : form})
 
 
 def user_session(request):
@@ -54,8 +67,6 @@ def user_session(request):
         username = request.user.username
 
 def parties_detail(request, pk):
-    party_info = Party.objects.filter(related_game = pk) 
+    party_info = Party.objects.filter(related_game = pk)
     #party = get_object_or_404(Party, pk=pk)
     return render(request, 'PartyAssembler/parties_detail.html', {'party_info': party_info})
-  
-
