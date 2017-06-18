@@ -25,8 +25,8 @@ class Game(models.Model):
     blank = True,
     width_field = "width_field",
     height_field = "height_field")
-    width_field = models.IntegerField(default = 0)
-    height_field = models.IntegerField(default = 0)
+    width_field = models.IntegerField(default = 270)
+    height_field = models.IntegerField(default = 380)
 
 
 class Party(models.Model):
