@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect # Funcao para redirecionar o usuari
 from .forms import RegisterForm, ProfileForm, PartyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Game, Party, Enter_party
+from .models import Game, Party, Enter_party, User_profile
+from django.contrib.auth.models import User
 
 def home(request):
     return render_to_response('PartyAssembler/index.html')
@@ -42,7 +43,7 @@ def reg_profile(request):
             profile = form.save(commit = False)
             profile.idt = request.user
             form.save()
-            return redirect('/games')
+            return redirect('/profile')
     else:
       form = ProfileForm()
     return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
@@ -61,9 +62,16 @@ def create_party(request):
 
 
 def profile(request):
+    try:
+        me = User.objects.get(username=request.user.username)
+        user = User_profile.objects.get(idt=me)
+    except User_profile.DoesNotExist:
+        return redirect('/alt-profile')
+
     if request.user.is_active:
-        username = request.user.username
-        return render (request, 'PartyAssembler/profile.html', {'username' : username})
+        me = User.objects.get(username=request.user.username)
+        userprofile=User_profile.objects.get(idt=me)
+        return render(request, 'PartyAssembler/profile.html', {'userprofile' : userprofile})
     else:
         return redirect('/login')
 

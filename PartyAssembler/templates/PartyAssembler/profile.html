@@ -6,7 +6,7 @@
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Examples</a></li>
+      <li><a href="/games">Games</a></li>
       <li class="active">User profile</li>
     </ol>
   </section>
@@ -20,7 +20,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
           <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="{{userprofile.profile_img}}" alt="User profile picture">
 
             <h3 class="profile-username text-center">{{request.user.username}}</h3>
 
@@ -125,13 +125,6 @@
                     <p for="inputName" class="col-sm-1 control-label">{{user.email}}</label>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label for="inputSkills" class="col-sm-2 control-label">Parties:</label>
-
-                  <div class="col-sm-10">
-                    <p for="inputName" class="col-sm-2 control-label">implementar e ajustar nomes na linha</p>
-                  </div>
-                </div>
 
                 <div class="form-group">
                   <label for="inputSkills" class="col-sm-2 control-label">Data de Criação:</label>
@@ -149,6 +142,21 @@
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="inputSkills" class="col-sm-2 control-label">Tags:</label>
+
+                  <div class="col-sm-10">
+                    <p for="inputName" class="col-sm-2 control-label">{{userprofile.tags}}</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputSkills" class="col-sm-2 control-label">Descrição:</label>
+
+                  <div class="col-sm-10">
+                    <p for="inputName" class="col-sm-1 control-label">{{userprofile.description}}</p>
+                  </div>
+                </div>
 
                 </div>
               </form>
