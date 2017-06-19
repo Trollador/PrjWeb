@@ -36,6 +36,7 @@ def do_logout(request):
     logout(request)
     return redirect('/login')
 
+@login_required
 def reg_profile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST)
@@ -60,7 +61,7 @@ def create_party(request):
     return render(request, 'PartyAssembler/create_party.html', {'form' : form})
 
 
-
+@login_required
 def profile(request):
     try:
         me = User.objects.get(username=request.user.username)
