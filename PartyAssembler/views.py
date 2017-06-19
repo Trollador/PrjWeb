@@ -86,3 +86,12 @@ def parties_detail(request, pk):
     party_info = Party.objects.filter(related_game = pk)
     #party = get_object_or_404(Party, pk=pk)
     return render(request, 'PartyAssembler/parties_detail.html', {'party_info': party_info})
+
+def enter_party(request, pk):
+    enter_party = Enter_party.objects.create(party_has_users=request.user, user_has_parties=Party.objects.get(id = pk))
+    enter_party.save()
+    return render(request, 'PartyAssembler/enter_party.html', {'enter_party' : enter_party})
+
+def parties(request):
+    all_parties = Party.objects.all()
+    return render(request, 'PartyAssembler/parties.html', {'all_parties': all_parties})

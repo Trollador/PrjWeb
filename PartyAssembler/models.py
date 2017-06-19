@@ -44,5 +44,5 @@ class Party(models.Model):
     height_field = models.IntegerField(default = 0)
 
 class Enter_party(models.Model):
-    usr_nickname = models.ForeignKey(User, default = 1)
-    party_name = models.ForeignKey(Party, default = 1)
+    party_has_users = models.ForeignKey(User, default = 1)
+    user_has_parties = models.ForeignKey(Party, default = 1)
