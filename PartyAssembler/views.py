@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render, redirect
+from django.shortcuts import render_to_response, render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect # Funcao para redirecionar o usuario
 from .forms import RegisterForm, ProfileForm, PartyForm
 from django.contrib.auth import authenticate, login, logout
@@ -107,16 +107,14 @@ def parties(request):
 
 @login_required
 def update_profile(request):
-    if request.method == "POST":
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            profile = form.save(commit = False)
-            form.save()
-            return redirect('/profile')
-    else:
-      form = ProfileForm()
-    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
-
+    me= User.objects.get(username=request.user.username)
+    instance = get_object_or_404(User_profile, idt=me)
+    form = ProfileForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance=form.save(commit=False)
+        instance.save()
+        return redirect('/profile')
+    return render(request, 'PartyAssembler/update-profile.html', {'form' : form})
 
 def baseNav(request):
     user_profile = User_profile.objects.filter(idt = request.user.id)

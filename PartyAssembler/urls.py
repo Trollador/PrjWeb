@@ -18,4 +18,5 @@ urlpatterns = [
      url(r'^messages/$', views.Messages, name='messages'),
      url(r'^chat/$', views.chatTemplate, name='home'),
      url(r'profile/(?P<username>[a-zA-Z0-9]+)$', views.users_profile),
+     url(r'^update-profile/$', views.update_profile, name= "update_profile"),
 ]
