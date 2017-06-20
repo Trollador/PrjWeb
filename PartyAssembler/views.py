@@ -10,12 +10,6 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 def home(request):
     return render_to_response('PartyAssembler/index.html')
 
-@login_required
-def games(request):
-    img = Game.objects.all().order_by("-id")
-    return render_to_response('PartyAssembler/games.html', {'img': img})
-
-
 def register(request):
         form = RegisterForm(request.POST or None)
         context = {'form':form}
@@ -38,6 +32,30 @@ def do_logout(request):
     return redirect('/login')
 
 @login_required
+def users_profile(request, username):
+    try:
+        me = User.objects.get(username=username)
+        user = User_profile.objects.get(idt=me)
+    except User.DoesNotExist:
+        return redirect('/')
+    return render(request, 'PartyAssembler/profile_others.html', {'userprofile' : user})
+
+
+@login_required
+def profile(request):
+    try:
+        me = User.objects.get(username=request.user.username)
+        user = User_profile.objects.get(idt=me)
+    except User_profile.DoesNotExist:
+        return redirect('/alt-profile')
+    return render(request, 'PartyAssembler/profile.html', {'userprofile' : user})
+
+@login_required
+def games(request):
+    img = Game.objects.all().order_by("-id")
+    return render_to_response('PartyAssembler/games.html', {'img': img})
+
+@login_required
 def reg_profile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST)
@@ -50,7 +68,7 @@ def reg_profile(request):
       form = ProfileForm()
     return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
 
-
+@login_required
 def create_party(request):
     if request.method == "POST":
        form = PartyForm(request.POST)
@@ -60,30 +78,6 @@ def create_party(request):
     else:
       form = PartyForm()
     return render(request, 'PartyAssembler/create_party.html', {'form' : form})
-
-
-@login_required
-def profile(request):
-    try:
-        me = User.objects.get(username=request.user.username)
-        user = User_profile.objects.get(idt=me)
-    except User_profile.DoesNotExist:
-        return redirect('/alt-profile')
-
-    if request.user.is_active:
-        me = User.objects.get(username=request.user.username)
-        userprofile=User_profile.objects.get(idt=me)
-        return render(request, 'PartyAssembler/profile.html', {'userprofile' : userprofile})
-    else:
-        return redirect('/login')
-
-@login_required
-def profile_others(request):
-    if request.user.is_active:
-        username = request.user.username
-        return render (request, 'PartyAssembler/profile_others.html')
-    else:
-        return redirect('/login')
 
 @login_required
 def parties_detail(request, pk):
