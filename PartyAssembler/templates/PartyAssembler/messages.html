@@ -1,9 +1,36 @@
 {% for obj in chat %}
-    {% if obj.user == request.user %}
-        <li class="text-right list-group-item">{{ obj.message }}</li>
-    {% else %}
-        <li class="text-left list-group-item">{{ obj.message }}</li>
-    {% endif %}
+{% if obj.user == request.user %}
+<div class="direct-chat-msg left">
+  <div class="direct-chat-info clearfix">
+    <span class="direct-chat-name pull-right">{{ request.user.username }}</span>
+    <span class="direct-chat-timestamp pull-left">{{ obj.created }}</span>
+  </div>
+  <div class="direct-chat-text">
+    <li class="text-right list-group-item">{{ obj.message }}</li>
+  </div>
+  <!-- /.direct-chat-text -->
+</div>
+{% else %}
+<div class="direct-chat-msg left">
+  <div class="direct-chat-info clearfix">
+    <span class="direct-chat-name pull-left">{{ obj.user.username }}</span>
+    <span class="direct-chat-timestamp pull-right">{{ obj.created }}</span>
+  </div>
+  <div class="direct-chat-text">
+    <li class="text-left list-group-item">{{ obj.message }}</li>
+  </div>
+  <!-- /.direct-chat-text -->
+</div>
+{% endif %}
 {% empty %}
-    <li class="text-right list-group-item">No messages yet!</li>
+<div class="direct-chat-msg right">
+  <div class="direct-chat-info clearfix">
+    <span class="direct-chat-name pull-right"></span>
+    <span class="direct-chat-timestamp pull-left"></span>
+  </div>
+  <div class="direct-chat-text">
+    <li class="text-right list-group-item">Bem-vindo ao chat! </li>
+  </div>
+  <!-- /.direct-chat-text -->
+</div>
 {% endfor %}

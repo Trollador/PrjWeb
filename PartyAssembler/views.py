@@ -95,7 +95,7 @@ def parties_detail(request, pk):
 def enter_party(request, pk):
     enter_party = Enter_party.objects.create(party_has_users=request.user, user_has_parties=Party.objects.get(id = pk))
     enter_party.save()
-    integrants = Enter_party.objects.all()
+    integrants = Enter_party.objects.filter(user_has_parties = pk)
     user = User.objects.all()
     return render(request, 'PartyAssembler/party.html', {'enter_party' : enter_party, 'integrants' : integrants,'user' : user})
 
@@ -139,11 +139,6 @@ def Post(request):
         return JsonResponse({ 'msg': msg, 'user': c.user.username })
     else:
         return HttpResponse('Request must be POST.')
-
-@login_required
-def Home(request):
-    c = Chat.objects.all()
-    return render(request, "PartyAssembler/party.html", {'home': 'active', 'chat': c})
 
 @login_required
 def chatTemplate(request):

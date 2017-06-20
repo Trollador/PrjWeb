@@ -12,7 +12,7 @@
 </section>
 <section class="content">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <!-- DIRECT CHAT -->
       <div class="box box-warning direct-chat direct-chat-warning">
         <div class="box-header with-border">
@@ -86,62 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
-        <!-- USERS LIST -->
-        <div class="box box-warning">
-          <div class="box-header with-border">
-            <h3 class="box-title">Membros da Party</h3>
-
-            <div class="box-tools pull-right">
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
-              </button>
-            </div>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <ul class="users-list clearfix">
-              {% for n in integrants %}
-              {% for m in user %}
-              {% if n.party_has_users == m %}
-              <li>
-                <img class="admin-img" src="\media\new-user-image-default.png" alt="User Image">
-                <a class="users-list-name" data-toggle="modal" data-target="#myModal">{{ m.username }}</a>
-              </li>
-              {% else %}
-              {% endif %}
-              {% endfor %}
-              {% endfor %}
-            </ul>
-            <!-- /.users-list -->
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer text-center">
-            <a href="javascript:void(0)" class="uppercase">Ver todos os usuários</a>
-          </div>
-          <!-- /.box-footer -->
-        </div>
-        <!--/.box -->
-      </div>
     </div>
   </section>
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Perfil de usuário</h4>
-        </div>
-        <div class="modal-body">
-          <h1>teste</h1>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger">Expulsar da party</button>
-          <button type="button" class="btn btn-primary">Adicionar como amigo</button>
-        </div>
-      </div>
-    </div>
-  </div>
   {% endblock %}

@@ -1,3 +1,8 @@
+.panel-body {
+    overflow-y: scroll;
+    height: 50%;
+}
+
 .users-list {
   width: 100%;
 }

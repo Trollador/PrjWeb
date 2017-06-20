@@ -17,5 +17,5 @@ urlpatterns = [
      url(r'^parties/$', views.parties, name="parties"),
      url(r'^post/$', views.Post, name='post'),
      url(r'^messages/$', views.Messages, name='messages'),
-     url(r'^chat/$', views.Home, name='home'),
+     url(r'^chat/$', views.chatTemplate, name='home'),
 ]
