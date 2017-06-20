@@ -46,3 +46,11 @@ class Party(models.Model):
 class Enter_party(models.Model):
     party_has_users = models.ForeignKey(User, default = 1)
     user_has_parties = models.ForeignKey(Party, default = 1)
+
+class Chat(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User)
+    message = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.message

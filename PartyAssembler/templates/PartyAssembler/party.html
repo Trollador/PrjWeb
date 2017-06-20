@@ -1,0 +1,129 @@
+{% extends 'baseChat.html' %}
+{% block content %}
+<section class="content-header">
+  <h1>
+    Party
+    <small>Sala da party</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="active">Chat</a></li>
+  </ol>
+</section>
+<section class="content">
+  <div class="col-md-8">
+    <!-- DIRECT CHAT -->
+    <div class="box box-warning direct-chat direct-chat-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title">Direct Chat</h3>
+
+        <div class="box-tools pull-right">
+          <span data-toggle="tooltip" title="3 New Messages" class="badge bg-yellow">3</span>
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
+            <i class="fa fa-comments"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <section class="content-header">
+          <h1>
+            Chat
+            <small>Chat Global</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Chat</li>
+          </ol>
+        </section>
+        <section class = "content">
+          <div id="chat-body" class="panel panel-default">
+            <div id="msg-list-div" class="panel-body">
+              <ul id="msg-list" class="list-group">
+                {% for obj in chat %}
+                {% if obj.user == request.user %}
+                <li class="text-right list-group-item">{{ obj.message }}</li>
+                {% else %}
+                <li class="text-left list-group-item">{{ obj.message }}</li>
+                {% endif %}
+                {% empty %}
+                <li class="text-right list-group-item">Bem-vindo ao chat!</li>
+                {% endfor %}
+                <script>
+                var chatlist = document.getElementById('msg-list-div');
+                chatlist.scrollTop = chatlist.scrollHeight;
+                </script>
+              </ul>
+            </div>
+          </div>
+
+          <form id="chat-form" method="post" action="/post/">
+            <div id="chat-bottom" class="input-group">
+              <input type="text" id="chat-msg" name="chat-msg" class="form-control"/>
+              <span class="input-group-btn">
+                <input class="btn btn-default" id="send" type="submit" value="Send"/>
+              </span>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <!-- USERS LIST -->
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Membros da Party</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body no-padding">
+          <ul class="users-list clearfix">
+            {% for n in integrants %}
+            {% for m in user %}
+            {% if n.party_has_users == m %}
+            <li>
+              <img class="admin-img" src="\media\new-user-image-default.png" alt="User Image">
+              <a class="users-list-name" data-toggle="modal" data-target="#myModal">{{ m.username }}</a>
+            </li>
+            {% else %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+          </ul>
+          <!-- /.users-list -->
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer text-center">
+          <a href="javascript:void(0)" class="uppercase">Ver todos os usuários</a>
+        </div>
+        <!-- /.box-footer -->
+      </div>
+      <!--/.box -->
+    </div>
+  </section>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Perfil de usuário</h4>
+        </div>
+        <div class="modal-body">
+          <h1>teste</h1>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger">Expulsar da party</button>
+          <button type="button" class="btn btn-primary">Adicionar como amigo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

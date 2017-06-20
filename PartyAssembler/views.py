@@ -3,8 +3,9 @@ from django.http import HttpResponseRedirect # Funcao para redirecionar o usuari
 from .forms import RegisterForm, ProfileForm, PartyForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Game, Party, Enter_party, User_profile
+from .models import Game, Party, Enter_party, User_profile, Chat
 from django.contrib.auth.models import User
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 def home(request):
     return render_to_response('PartyAssembler/index.html')
@@ -76,6 +77,7 @@ def profile(request):
     else:
         return redirect('/login')
 
+@login_required
 def profile_others(request):
     if request.user.is_active:
         username = request.user.username
@@ -83,16 +85,72 @@ def profile_others(request):
     else:
         return redirect('/login')
 
+@login_required
 def parties_detail(request, pk):
     party_info = Party.objects.filter(related_game = pk)
     #party = get_object_or_404(Party, pk=pk)
     return render(request, 'PartyAssembler/parties_detail.html', {'party_info': party_info})
 
+@login_required
 def enter_party(request, pk):
     enter_party = Enter_party.objects.create(party_has_users=request.user, user_has_parties=Party.objects.get(id = pk))
     enter_party.save()
-    return render(request, 'PartyAssembler/enter_party.html', {'enter_party' : enter_party})
+    integrants = Enter_party.objects.all()
+    user = User.objects.all()
+    return render(request, 'PartyAssembler/party.html', {'enter_party' : enter_party, 'integrants' : integrants,'user' : user})
 
+    """
+ party_list = Enter_party.objects.filter(user_has_parties=Party.objects.get(id = pk))
+ users_id = None
+    for party in party_list:
+        users_id += Enter_party.objects.get(party_has_users)
+    """
+
+@login_required
 def parties(request):
     all_parties = Party.objects.all()
     return render(request, 'PartyAssembler/parties.html', {'all_parties': all_parties})
+
+@login_required
+def update_profile(request):
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit = False)
+            form.save()
+            return redirect('/profile')
+    else:
+      form = ProfileForm()
+    return render(request, 'PartyAssembler/user_profile.html', {'form' : form})
+
+
+def baseNav(request):
+    user_profile = User_profile.objects.filter(idt = request.user.id)
+    user_info = request.user
+    return render(request, "PartyAssembler/baseNav.html", {'user_profile': user_profile, 'user_info': user_info })
+
+@login_required
+def Post(request):
+    if request.method == "POST":
+        msg = request.POST.get('msgbox', None)
+        c = Chat(user=request.user, message=msg)
+        if msg != '':
+            c.save()
+        return JsonResponse({ 'msg': msg, 'user': c.user.username })
+    else:
+        return HttpResponse('Request must be POST.')
+
+@login_required
+def Home(request):
+    c = Chat.objects.all()
+    return render(request, "PartyAssembler/party.html", {'home': 'active', 'chat': c})
+
+@login_required
+def chatTemplate(request):
+    c = Chat.objects.all()
+    return render(request, "PartyAssembler/chat.html", {'home': 'active', 'chat': c})
+
+@login_required
+def Messages(request):
+    c = Chat.objects.all()
+    return render(request, 'PartyAssembler/messages.html', {'chat': c})

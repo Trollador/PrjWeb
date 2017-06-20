@@ -1,0 +1,46 @@
+.users-list {
+  width: 100%;
+}
+.users-list li img{
+  border: 4px solid transparent;
+}
+.users-list li .admin-img{
+  border: 4px solid #e7ca0c;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
+.users-list li .user-img{
+  border: 4px solid #07c114;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.9);
+}
+.direct-chat-messages{
+  height: 450px;
+}
+.jumbotron {
+  margin-bottom: 0;
+  position: relative;
+  background: none;
+  color: #DEDDDB;
+  text-align: center;
+  padding-top: 300px;
+  padding-bottom: 150px;
+}
+.jumbotron .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../img/bg-game.jpg");
+  background-position: 0% 25%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-filter: brightness(0.5);
+  -moz-filter: brightness(0.5);
+  -ms-filter: brightness(0.5);
+  -o-filter: brightness(0.5);
+  filter: brightness(0.5);
+  z-index: -1;
+}
+.skin-yellow .main-header .navbar-transparent {
+  background-color: transparent;
+}

@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
-from .models import User_profile, Party, Game
+from .models import User_profile, Party, Game, Chat
 from django.forms import ModelChoiceField
 
 
@@ -67,3 +67,8 @@ class PartyForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome que será mostrado aos demais usuários'}),
             'description': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Descrição da party'}),
             }
+
+class ChatForm(forms.ModelForm):
+        class Meta:
+            model = Chat
+            fields = ('message',)
