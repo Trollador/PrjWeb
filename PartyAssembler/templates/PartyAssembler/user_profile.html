@@ -1,0 +1,46 @@
+{% extends 'baseNav.html' %}
+{% block content %}
+
+<section class="content-header">
+  <h1>
+    Edição de Perfil de Usuário
+    <small>Party por jogos</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><i class="fa fa-dashboard"></i> Home</a></li>
+    <li>Perfil</li>
+    <li class="active">Editar Perfil</li>
+  </ol>
+</section>
+<section class="content">
+  <div class="box box-warning">
+    <div class="box-header with-border">
+      <h3 class="box-title">Perfil de Usuário</h3>
+    </div>
+    <form method="POST" class="post-form">{% csrf_token %}
+      <div class="box-body">
+        <div class="form-group">
+          <label>Nome de Usuário: </label>
+          {{ user.username }}
+        </div>
+        <div class="form-group">
+          <label>Nomes em Jogos</label>
+          {{ form.tags }}
+        </div>
+        <div class="form-group">
+          <label>Descrição</label>
+          {{ form.description }}
+        </div>
+        <div class="form-group">
+          <label>Imagem de Perfil</label>
+          {{ form.profile_img }}
+        </div>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Atualizar</button>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
