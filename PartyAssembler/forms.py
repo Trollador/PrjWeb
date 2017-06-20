@@ -9,10 +9,10 @@ from django.forms import ModelChoiceField
 class RegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name','username','last_name','email','password']
+        fields = ['username','first_name','last_name','email','password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome'}),
             'username': forms.TextInput(attrs={'class': 'form-control','maxlength': 15, 'placeholder': 'Nome de usuário' }),
+            'first_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 55, 'placeholder': 'Nome'}),
             'email': forms.TextInput(attrs={'class': 'form-control','maxlength': 30, 'placeholder': 'E-mail'}),
             'last_name': forms.TextInput(attrs={'class': 'form-control','maxlength': 10, 'placeholder': 'Data de nascimento'}),
             'password': forms.PasswordInput(attrs={'class':'form-control','maxlength': 12, 'placeholder': 'Senha'}),
